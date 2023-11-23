@@ -177,7 +177,7 @@ const checboxFocus = ref(false)
 const twelvesDisplayCards = computed(() =>
   filteredCountries.data
     .filter(
-      (country) => country.name !== 'Anguilla' && country.continent.name.includes(continent.value)
+      (country) => country.name !== 'Anguilla' && country.name !== 'Antarctica' && country.continent.name.includes(continent.value)
     )
     .slice(0, 12)
 )
