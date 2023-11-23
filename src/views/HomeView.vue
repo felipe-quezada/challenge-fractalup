@@ -4,51 +4,34 @@
       <form class="search-form" @submit.prevent="">
         <div class="search-form-input-container">
           <label>País</label>
-          <input
-            class="search-form-input"
-            type="text"
-            v-model="message"
-            @input="getCountry(message)"
-            @focusin="handleOnFocusInput()"
-            placeholder=" Escribe el país que deseas ver"
-          />
+          <input class="search-form-input" type="text" v-model="message" @input="getCountry(message)"
+            @focusin="handleOnFocusInput()" placeholder=" Escribe el país que deseas ver" />
         </div>
         <button class="search-form-button">
           <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" fill="#fff">
             <path
-              d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
-            />
+              d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
           </svg>
           <span> Buscar </span>
         </button>
-        <div v-if="checboxFocus" class="checkbox-continents">
+        <div v-if="checboxFocus" class="checkbox-continents" @focusin="handleOnFocusInput()"
+          @focusout="handleOnFocusInput(true)">
           <p style="position: absolute; top: 10px; left: 20px">Filtrar por componentes</p>
-          <button
-            @click="handleOnFocusInput(true)"
-            style="position: absolute; top: 20px; right: 20px; border-style: none; cursor: pointer"
-          >
-            X
+          <button @click="unfilted()"
+            style="position: absolute; top: 20px; right: 20px; border-style: none; cursor: pointer; color: #009cff;">
+            Limpiar
           </button>
           <div class="checbox-option">
             <Checkbox v-model="continent" inputId="Africa" name="continent" value="Africa" />
-            <label for="Africa" style="margin-left: 8px">
+            <label for="Africa" style="margin-left: 8px ">
               <img class="checkbox-option-image" src="../assets/africa.png" alt="africa" />
               <span>Africa</span>
             </label>
           </div>
           <div class="checbox-option">
-            <Checkbox
-              v-model="continent"
-              inputId="North America"
-              name="continent"
-              value="North America"
-            />
+            <Checkbox v-model="continent" inputId="North America" name="continent" value="North America" />
             <label for="North America" style="margin-left: 8px">
-              <img
-                class="checkbox-option-image"
-                src="../assets/north-america.png"
-                alt="north-america"
-              />
+              <img class="checkbox-option-image" src="../assets/north-america.png" alt="north-america" />
               <span>North America</span>
             </label>
           </div>
@@ -74,18 +57,9 @@
             </label>
           </div>
           <div class="checbox-option">
-            <Checkbox
-              v-model="continent"
-              inputId="South America"
-              name="continent"
-              value="South America"
-            />
+            <Checkbox v-model="continent" inputId="South America" name="continent" value="South America" />
             <label for="South America" style="margin-left: 8px">
-              <img
-                class="checkbox-option-image"
-                src="../assets/south-america.png"
-                alt="south-america"
-              />
+              <img class="checkbox-option-image" src="../assets/south-america.png" alt="south-america" />
               <span>South America</span>
             </label>
           </div>
@@ -95,17 +69,11 @@
     <br />
     <section v-if="!loading" class="card-container">
       <div v-for="(country, index) in twelvesDisplayCards" :key="country.code">
-        <div
-          @click="handdleSelectClick(country, index)"
-          class="card-country-container"
-          :style="{ backgroundImage: `url(${orderCountry(country.name)})` }"
-        >
+        <div @click="handdleSelectClick(country, index)" class="card-country-container"
+          :style="{ backgroundImage: `url(${orderCountry(country.name)})` }">
           <div :class="`card-country-container-text ${index === selected.index ? 'active' : ''}`">
             <div class="card-country-flag">
-              <img
-                :src="`https://flagsapi.com/${country.code}/flat/64.png`"
-                style="width: 100%; height: 100%"
-              />
+              <img :src="`https://flagsapi.com/${country.code}/flat/64.png`" style="width: 100%; height: 100%" />
             </div>
             <br />
             <div>
@@ -122,18 +90,12 @@
       <button @click="handdleSelectClick(null, selected.index)" class="button-close-float">
         x
       </button>
-      <div
-        class="float-card-img"
-        :style="{ backgroundImage: `url(${orderCountry(selected.country.name)})` }"
-      ></div>
+      <div class="float-card-img" :style="{ backgroundImage: `url(${orderCountry(selected.country.name)})` }"></div>
       <section class="float-card-info">
         <div class="float-card-info-card">
           <div class="float-card-info-card-head">
             <div class="card-country-flag">
-              <img
-                :src="`https://flagsapi.com/${selected.country.code}/flat/64.png`"
-                style="width: 100%; height: 100%"
-              />
+              <img :src="`https://flagsapi.com/${selected.country.code}/flat/64.png`" style="width: 100%; height: 100%" />
             </div>
             <br />
             <div>
@@ -149,29 +111,22 @@
             </li>
             <br />
             <li>
-              <span class="float-card-text-enphasis">Lenguage: </span
-              >{{ selected.country.languages[0].name }}
+              <span class="float-card-text-enphasis">Lenguage: </span>{{ selected.country.languages[0].name }}
             </li>
             <br />
             <li><span class="float-card-text-enphasis">Population: </span>500k pople</li>
             <br />
             <li>
-              <span class="float-card-text-enphasis">Currency: </span
-              >{{ selected.country.currency }}
+              <span class="float-card-text-enphasis">Currency: </span>{{ selected.country.currency }}
             </li>
             <br />
             <li>
               <span class="float-card-text-enphasis">Region:</span>
               <div class="card flex justify-content-center">
-                <Dropdown
-                  v-model="selectedState"
-                  :options="selected.country.states"
-                  optionLabel="name"
+                <Dropdown v-model="selectedState" :options="selected.country.states" optionLabel="name"
                   :virtualScrollerOptions="{ itemSize: 20 }"
-                  :panel-style="{ backgroundColor: '#ffffff', fontSize: '10px' }"
-                  placeholder="Select an State"
-                  style="width: 300px; height: auto; font-size: 12px"
-                />
+                  :panel-style="{ backgroundColor: '#ffffff', fontSize: '10px' }" placeholder="Select an State"
+                  style="width: 300px; height: auto; font-size: 12px" />
               </div>
             </li>
           </ul>
@@ -227,6 +182,9 @@ const twelvesDisplayCards = computed(() =>
     )
     .slice(0, 12)
 )
+const unfilted = () => {
+  continent.value = []
+}
 
 const handleOnFocusInput = (bool) => {
   if (bool) {
@@ -390,8 +348,8 @@ watch(result, () => {
 }
 
 .float-card-container {
-  width: 350px;
-  height: 520px;
+  width: 100%;
+  height: auto;
   background-color: #ffffff;
   position: absolute;
   bottom: 0;
@@ -454,11 +412,12 @@ watch(result, () => {
   gap: 0.75rem;
   top: 80px;
   right: -100px;
-  padding: 20px;
+  padding: 50px;
   background-color: #ffffff;
   border-radius: 15px;
   width: 700px;
   height: 400px;
+  cursor: pointer;
 }
 
 .checbox-option {
@@ -466,10 +425,13 @@ watch(result, () => {
   align-items: center;
   width: 150px;
   height: 100px;
+  text-decoration: none;
+
 }
 
 .checkbox-option-image {
   width: 100%;
   border-radius: 15px;
+
 }
 </style>
