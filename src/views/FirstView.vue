@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-const welcomeMessageFirstView = 'Hola! Esta es la vista 1'  
+const welcomeMessageFirstView = 'Hola! Esta es la vista 1'
 </script>
 
 <style scoped>

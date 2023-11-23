@@ -1,13 +1,17 @@
 <template>
   <section class="navbar container">
     <div class="navbar-logo">Logo</div>
-    <br>
+    <br />
     <nav class="navbar-list container">
       <RouterLink class="navbar-list-link" active-class="active" to="/">Home</RouterLink>
-      <br>
-      <RouterLink class="navbar-list-link" active-class="active" to="/firstview">Vista 1</RouterLink>
-      <br>
-      <RouterLink class="navbar-list-link" active-class="active" to="/secondview">Vista 2</RouterLink>
+      <br />
+      <RouterLink class="navbar-list-link" active-class="active" to="/firstview"
+        >Vista 1</RouterLink
+      >
+      <br />
+      <RouterLink class="navbar-list-link" active-class="active" to="/secondview"
+        >Vista 2</RouterLink
+      >
     </nav>
   </section>
 </template>
