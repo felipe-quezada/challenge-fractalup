@@ -14,16 +14,15 @@
           </svg>
           <span> Buscar </span>
         </button>
-        <div v-if="checboxFocus" class="checkbox-continents" @focusin="handleOnFocusInput()"
-          @focusout="handleOnFocusInput(true)">
+        <div v-if="checboxFocus" class="checkbox-continents">
           <p style="position: absolute; top: 10px; left: 20px">Filtrar por componentes</p>
-          <button @click="unfilted()"
-            style="position: absolute; top: 20px; right: 20px; border-style: none; cursor: pointer; color: #009cff;">
-            Limpiar
+          <button @click="handleOnFocusInput(true)"
+            style="position: absolute; top: 20px; right: 20px; border-style: none; cursor: pointer">
+            X
           </button>
           <div class="checbox-option">
             <Checkbox v-model="continent" inputId="Africa" name="continent" value="Africa" />
-            <label for="Africa" style="margin-left: 8px ">
+            <label for="Africa" style="margin-left: 8px">
               <img class="checkbox-option-image" src="../assets/africa.png" alt="africa" />
               <span>Africa</span>
             </label>
@@ -182,9 +181,6 @@ const twelvesDisplayCards = computed(() =>
     )
     .slice(0, 12)
 )
-const unfilted = () => {
-  continent.value = []
-}
 
 const handleOnFocusInput = (bool) => {
   if (bool) {
@@ -348,8 +344,8 @@ watch(result, () => {
 }
 
 .float-card-container {
-  width: 100%;
-  height: auto;
+  width: 350px;
+  height: 520px;
   background-color: #ffffff;
   position: absolute;
   bottom: 0;
@@ -412,12 +408,11 @@ watch(result, () => {
   gap: 0.75rem;
   top: 80px;
   right: -100px;
-  padding: 50px;
+  padding: 20px;
   background-color: #ffffff;
   border-radius: 15px;
   width: 700px;
   height: 400px;
-  cursor: pointer;
 }
 
 .checbox-option {
@@ -425,13 +420,10 @@ watch(result, () => {
   align-items: center;
   width: 150px;
   height: 100px;
-  text-decoration: none;
-
 }
 
 .checkbox-option-image {
   width: 100%;
   border-radius: 15px;
-
 }
 </style>
